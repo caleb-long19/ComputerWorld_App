@@ -1,7 +1,6 @@
 # COMPUTER WORLD
 ### PROJECT DESCRIPTION:
-The Computer World Application is being used as the front-end for the Computer World API, which can be found here: <br />
-[COMPUTER WORLD API](https://github.com/caleb-long19/ComputerWorld_API) 
+The Computer World Application is being used as the front-end for the Computer World API, which can be found here: [COMPUTER WORLD API](https://github.com/caleb-long19/ComputerWorld_API) 
 <br />
 <br />
 The application will allow users to manipulate various data, including, manufacturers, products, and create an order. The purpose of this project is to display my ability 
