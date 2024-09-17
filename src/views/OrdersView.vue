@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <div></div>
+  <h1>COMPUTER WORLD - ORDERS</h1>
 </template>

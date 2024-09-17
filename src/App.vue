@@ -7,10 +7,10 @@ import { RouterLink, RouterView } from 'vue-router'
     <header>
       <div class="wrapper">
         <nav>
-          <RouterLink to="/">HOME</RouterLink> |
-          <RouterLink to="/manufacturers">MANUFACTURERS</RouterLink> |
-          <RouterLink to="/products">PRODUCTS</RouterLink> |
-          <RouterLink to="/orders">ORDERS</RouterLink>
+          <RouterLink :to="{ name: 'home'}">HOME</RouterLink> |
+          <RouterLink :to="{ name: 'manufacturer_list'}">MANUFACTURERS</RouterLink> |
+          <RouterLink :to="{ name: 'product_list'}">PRODUCTS</RouterLink> |
+          <RouterLink :to="{ name: 'order_list'}">ORDERS</RouterLink>
         </nav>
       </div>
     </header>
