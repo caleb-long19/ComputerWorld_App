@@ -2,5 +2,5 @@
 </script>
 
 <template>
-  <div></div>
+  <h1>COMPUTER WORLD</h1>
 </template>
