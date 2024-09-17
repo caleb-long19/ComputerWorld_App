@@ -7,10 +7,10 @@ import { RouterLink, RouterView } from 'vue-router'
     <header>
       <div class="wrapper">
         <nav>
-          <RouterLink to="/">Home</RouterLink> |
-          <RouterLink to="/manufacturers">Manufacturers</RouterLink> |
-          <RouterLink to="/products">Products</RouterLink> |
-          <RouterLink to="/orders">Orders</RouterLink>
+          <RouterLink to="/">HOME</RouterLink> |
+          <RouterLink to="/manufacturers">MANUFACTURERS</RouterLink> |
+          <RouterLink to="/products">PRODUCTS</RouterLink> |
+          <RouterLink to="/orders">ORDERS</RouterLink>
         </nav>
       </div>
     </header>
@@ -27,14 +27,14 @@ import { RouterLink, RouterView } from 'vue-router'
   color: #2c3e50;
 }
 nav {
-  padding: 30px;
+  padding: 20px;
 }
 nav a {
   font-weight: bold;
   color: #2c3e50;
 }
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #FFDB58;
 }
 h2 {
   font-size: 20px;
