@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # COMPUTER WORLD
 ### PROJECT DESCRIPTION:
 The Computer World Application is being used as the front-end for the Computer World API, which can be found here: [COMPUTER WORLD API](https://github.com/caleb-long19/ComputerWorld_API) 
@@ -5,32 +6,21 @@ The Computer World Application is being used as the front-end for the Computer W
 <br />
 The application will allow users to manipulate various data, including, manufacturers, products, and create an order. The purpose of this project is to display my ability 
 to develop an api alongside an application to prepare for developing a large scale project.
+=======
+# computer-world-app
+>>>>>>> Stashed changes
 
-## PROJECT DETAILS
- - Deployment
-   - Render: Visit [Computer World](https://computer-world-wvo6.onrender.com/) 
- - Development Tools
-   - Webstorm
-   - SQLITE
-   - GOLAND
- - Languages/Tools/Frameworks
-   -   Vue 3
-   -   Javascript
-   -   HTML
-   -   CSS
-   -   Axios
-   -   SQL
+This template should help get you started developing with Vue 3 in Vite.
 
-## DESIGN CONCEPTS
-  - NONE TO DISPLAY  
+## Recommended IDE Setup
 
-## CURRENT ISSUES
-  - NONE YET
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## RECOMMENDED IDE SETUP
-[Webstorm](https://code.visualstudio.com/)
+## Customize configuration
 
-## PROJECT SETUP
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
 
 ```sh
 npm install
