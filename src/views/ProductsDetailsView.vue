@@ -8,12 +8,12 @@ const props = defineProps({
   },
 })
 
-const manufacturer = ref(null)
+const product = ref(null)
 
 onMounted(() => {
-  ComputerWorldServices.getManufacturer(props.id)
+  ComputerWorldServices.getProduct(props.id)
     .then((response) => {
-      manufacturer.value = response.data
+      product.value = response.data
     })
     .catch((error) => {
       console.log(error)
@@ -22,8 +22,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="manufacturer">
-    <h1>{{ manufacturer.manufacturer_id }}</h1>
-    <p>{{ manufacturer.manufacturer_name }}</p>
+  <div v-if="product">
+    <h1>{{ product.product_id }}</h1>
+    <p>{{ product.product_name }}</p>
   </div>
 </template>

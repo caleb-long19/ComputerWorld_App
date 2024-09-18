@@ -1,12 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import ManufacturersDisplay from '@/components/ManufacturersDisplay.vue'
-import ManufacturerServices from '@/services/ManufacturerServices.js'
+import ManufacturersDisplay from '../components/ManufacturersDisplay.vue'
+import ComputerWorldServices from '../services/ComputerWorldServices.js'
 
 const manufacturers = ref(null)
 
 onMounted(() => {
-  ManufacturerServices.getManufacturers()
+  ComputerWorldServices.getManufacturers()
     .then((response) => {
       manufacturers.value = response.data
     })
