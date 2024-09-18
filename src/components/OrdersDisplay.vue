@@ -1,46 +1,50 @@
 <script setup>
+// Define props to accept an array of orders
 defineProps({
-  order: {
-    type: Object,
+  orders: {
+    type: Array,
     required: true,
   },
 })
+
+// Define an event emitter to send selected order back to the parent
+const emit = defineEmits(['selectOrder'])
 </script>
 
 <template>
-  <RouterLink
-    class="card-link"
-    :to="{ name: 'order_details', params: { id: order.order_id } }">
-    <div class="card">
-      <h3 class="medium-text-size">Order ID: {{ order.order_id }}</h3>
-      <p class="small-text-size">Order Reference: {{ order.order_ref }}</p>
-    </div>
-  </RouterLink>
+  <div class="container">
+    <!-- Single table with rows generated from the orders array -->
+    <table class="table table-hover thead-dark">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Order Reference</th>
+        <th scope="col">Order Amount</th>
+        <th scope="col">Product ID</th>
+        <th scope="col">Order Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Loop through the manufacturers and display each order in a row -->
+      <tr
+          v-for="(order, index) in orders"
+          :key="order.order_id"
+          @click="emit('selectOrder', order)"
+          style="cursor: pointer"
+      >
+        <th scope="row">{{ index + 1 }}</th>
+        <td>
+          <RouterLink :to="{ name: 'order_details', params: { id: order.order_id } }">
+            {{ order.order_id }}
+          </RouterLink>
+        </td>
+        <td>{{ order.order_ref }}</td>
+        <td>{{ order.order_amount }}</td>
+        <td>{{ order.product_id }}</td>
+        <td>{{ order.order_price }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
-
-<style scoped>
-.card {
-  width: 200px;
-  margin-bottom: 25px;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-  padding: 2px 16px;
-  border-radius: 5px; /* 5px rounded corners */
-}
-.card:hover {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.4s;
-  transform: scale(1.1);
-}
-.card-link {
-  color: #2c3e50;
-  text-decoration: none;
-}
-.medium-text-size{
-  font-family: sans-serif;
-  font-size: 12pt;
-}
-.small-text-size{
-  font-family: sans-serif;
-  font-size: 10pt;
-}
-</style>

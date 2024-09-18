@@ -3,7 +3,13 @@ import { ref, onMounted } from 'vue'
 import ManufacturersDisplay from '../components/ManufacturersDisplay.vue'
 import ComputerWorldServices from '../services/ComputerWorldServices.js'
 
-const manufacturers = ref(null)
+const manufacturers = ref([])
+
+const selectedManufacturer = ref({
+  manufacturer_id: '',
+  manufacturer_name: ''
+}) // Object to store selected manufacturer details
+
 
 onMounted(() => {
   ComputerWorldServices.getManufacturers()
@@ -14,52 +20,64 @@ onMounted(() => {
       console.log(error)
     })
 })
+
+// Function to handle row click and update selected manufacturer
+const selectManufacturer = (manufacturer) => {
+  selectedManufacturer.value = { ...manufacturer } // Update with clicked manufacturer data
+}
 </script>
 
 <template>
-  <h1>COMPUTER WORLD</h1>
-  <h2>- MANUFACTURERS -</h2>
-  <div class="manufacturers">
-    <div class="card-overflow">
-      <div>
-        <ManufacturersDisplay v-for="manufacturer in manufacturers" :key="manufacturer.id" :manufacturer="manufacturer" />
-      </div>
-    </div>
+  <div class="layout">
+    <h1>COMPUTER WORLD</h1>
+    <h2>- MANUFACTURERS -</h2>
   </div>
-  <div class="form-layout">
-    <form class="card">
-      <h4>MANUFACTURER MANAGER</h4>
-      <input type="checkbox">
-      <button type="submit" class="btn btn-primary">Update</button>
-      <button type="submit" class="btn btn-danger">Delete</button>
+
+  <!-- Pass manufacturers and selection handler to ManufacturersDisplay -->
+  <div class="container">
+    <ManufacturersDisplay
+        :manufacturers="manufacturers"
+        @selectManufacturer="selectManufacturer"
+    />
+  </div>
+
+  <!-- Manufacturer Manager form populated with selected manufacturer data -->
+  <div class="container">
+    <form>
+      <h2>MANUFACTURER MANAGER</h2>
+      <div class="mb-3">
+        <label class="mb-1" for="manufacturerId">Manufacturer ID</label>
+        <input
+            type="text"
+            class="form-control"
+            id="manufacturerId"
+            v-model="selectedManufacturer.manufacturer_id"
+            placeholder="ID"
+            readonly
+        />
+      </div>
+      <div class="mb-3">
+        <label class="mb-1" for="manufacturerName">Manufacturer Name</label>
+        <input
+            type="text"
+            class="form-control"
+            id="manufacturerName"
+            v-model="selectedManufacturer.manufacturer_name"
+            placeholder="Name"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </template>
 
-<style scoped>
-.manufacturers {
-  float: left;
-  position: relative;
-  left: 34%;
-}
-.form-layout {
-  float: left;
-  position: relative;
-  left: 34%;
-}
-.card {
-  width: 350px;
-  height: 440px;
-  margin-bottom: 25px;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-  padding: 2px 16px;
-  border-radius: 5px; /* 5px rounded corners */
-}
-.card-overflow {
-  width: 250px;
-  height: 450px;
-  overflow:scroll;
-  padding: 5px;
-
+<style>
+.layout {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-shadow: 2px 4px #2c3e50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #FFDB58;
 }
 </style>

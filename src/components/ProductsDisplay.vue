@@ -1,47 +1,52 @@
 <script setup>
+// Define props to accept an array of manufacturers
 defineProps({
-  product: {
-    type: Object,
+  products: {
+    type: Array,
     required: true,
   },
 })
+
+// Define an event emitter to send selected manufacturer back to the parent
+const emit = defineEmits(['selectProduct'])
 </script>
 
 <template>
-  <RouterLink
-    class="card-link"
-    :to="{ name: 'product_details', params: { id: product.product_id } }"
-  >
-    <div class="card">
-      <h3 class="medium-text-size">Product ID: {{ product.product_id }}</h3>
-      <p class="small-text-size">Product: {{ product.product_name }}</p>
-    </div>
-  </RouterLink>
+  <div class="container">
+    <!-- Single table with rows generated from the manufacturers array -->
+    <table class="table table-hover thead-dark">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Product Code</th>
+        <th scope="col">Product Title</th>
+        <th scope="col">Manufacturer ID</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Loop through the manufacturers and display each manufacturer in a row -->
+      <tr
+          v-for="(product, index) in products"
+          :key="product.product_id"
+          @click="emit('selectProduct', product)"
+          style="cursor: pointer"
+      >
+        <th scope="row">{{ index + 1 }}</th>
+        <td>
+          <RouterLink :to="{ name: 'product_details', params: { id: product.product_id } }">
+            {{ product.product_id }}
+          </RouterLink>
+        </td>
+        <td>{{ product.product_code }}</td>
+          <td>{{ product.product_name }}</td>
+          <td>{{ product.manufacturer_id }}</td>
+          <td>{{ product.product_stock }}</td>
+          <td>{{ product.product_price }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
-
-<style scoped>
-.card {
-  width: 200px;
-  margin-bottom: 25px;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-  padding: 2px 16px;
-  border-radius: 5px; /* 5px rounded corners */
-}
-.card:hover {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.4s;
-  transform: scale(1.1);
-}
-.card-link {
-  color: #2c3e50;
-  text-decoration: none;
-}
-.medium-text-size{
-  font-family: sans-serif;
-  font-size: 12pt;
-}
-.small-text-size{
-  font-family: sans-serif;
-  font-size: 10pt;
-}
-</style>
