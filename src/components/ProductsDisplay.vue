@@ -9,30 +9,39 @@ defineProps({
 
 <template>
   <RouterLink
-    class="event-link"
+    class="card-link"
     :to="{ name: 'product_details', params: { id: product.product_id } }"
   >
-    <div class="event-card">
-      <h2>{{ product.product_id }}</h2>
-      <p>{{ product.product_name }}</p>
+    <div class="card">
+      <h3 class="medium-text-size">Product ID: {{ product.product_id }}</h3>
+      <p class="small-text-size">Product: {{ product.product_name }}</p>
     </div>
   </RouterLink>
 </template>
 
 <style scoped>
-.event-card {
-  padding: 20px;
-  width: 250px;
-  cursor: pointer;
-  border: 1px solid #39495c;
-  margin-bottom: 18px;
+.card {
+  width: 200px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  padding: 2px 16px;
+  border-radius: 5px; /* 5px rounded corners */
 }
-.event-card:hover {
-  transform: scale(1.01);
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
+.card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.4s;
+  transform: scale(1.1);
 }
-.event-link {
+.card-link {
   color: #2c3e50;
   text-decoration: none;
+}
+.medium-text-size{
+  font-family: sans-serif;
+  font-size: 12pt;
+}
+.small-text-size{
+  font-family: sans-serif;
+  font-size: 10pt;
 }
 </style>
