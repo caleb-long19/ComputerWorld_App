@@ -66,7 +66,13 @@ const selectManufacturer = (manufacturer) => {
             placeholder="Name"
         />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <!-- Buttons are not currently functioning -->
+      <div v-if="selectedManufacturer.manufacturer_id">
+        <button type="submit" class="btn btn-primary mx-1">Update</button>
+        <button type="submit" class="btn btn-danger mx-1">Delete</button>
+        <button type="submit" class="btn btn-primary mx-1">Clear Selected Record</button>
+      </div>
+      <button v-if="!selectedManufacturer.manufacturer_id" type="submit" class="btn btn-primary">Create</button>
     </form>
   </div>
 </template>

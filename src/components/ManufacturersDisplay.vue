@@ -31,11 +31,7 @@ const emit = defineEmits(['selectManufacturer'])
           style="cursor: pointer"
       >
         <th scope="row">{{ index + 1 }}</th>
-        <td>
-          <RouterLink :to="{ name: 'manufacturer_details', params: { id: manufacturer.manufacturer_id } }">
-            {{ manufacturer.manufacturer_id }}
-          </RouterLink>
-        </td>
+        <td>{{ manufacturer.manufacturer_id }}</td>
         <td>{{ manufacturer.manufacturer_name }}</td>
       </tr>
       </tbody>
