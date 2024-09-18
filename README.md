@@ -22,7 +22,7 @@ to develop an api alongside an application to prepare for developing a large sca
    -   SQL
 
 ## DESIGN CONCEPTS
-  - NONE TO DISPLAY  
+![alt text](concepts/Computer%20World%20-%20Initial%20Concept.png)
 
 ## TODO
 ```
