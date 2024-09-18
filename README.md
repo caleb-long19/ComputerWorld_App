@@ -24,11 +24,18 @@ to develop an api alongside an application to prepare for developing a large sca
 ## DESIGN CONCEPTS
   - NONE TO DISPLAY  
 
-## CURRENT ISSUES
-  - NONE YET
+## TODO
+```
+  - Implement the update function. Allow users to select an manufacturer, product, or order and have those details display in the form (possibly via selected index). Allow them to change the values in the boxes and submit the changes. Make sure to validate the form data before sending.
+  - Implement the delete function. Same as before, retrieve index, display details in a form and delete record from chosen table.
+  - Implement the create function. Possibly use a bool to ask the user if they wish to create a user, if no, proceed with update/delete, if yes, disable the selected index chosen and create the data.
+  - Finish off website design concepts to get a better idea of how the final front-end product will look.
+  - Finish off the remaining tutorials.
+  - Token based authentication.
+```
 
-## RECOMMENDED IDE SETUP
-[Webstorm](https://code.visualstudio.com/)
+## RECOMMENDED IDE
+Webstorm Application: [Download](https://code.visualstudio.com/)
 
 ## PROJECT SETUP
 
