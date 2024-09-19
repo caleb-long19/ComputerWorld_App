@@ -3,9 +3,8 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div id="layout">
     <header>
-      <div class="wrapper">
+      <div id="layout">
         <nav>
           <RouterLink :to="{ name: 'home'}">HOME</RouterLink> |
           <RouterLink :to="{ name: 'manufacturer_list'}">MANUFACTURERS</RouterLink> |
@@ -15,7 +14,6 @@ import { RouterLink, RouterView } from 'vue-router'
       </div>
     </header>
   <RouterView />
-  </div>
 </template>
 
 <style>

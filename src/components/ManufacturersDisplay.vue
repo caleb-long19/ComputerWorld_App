@@ -1,46 +1,41 @@
 <script setup>
+// Define props to accept an array of manufacturers
 defineProps({
-  manufacturer: {
-    type: Object,
+  manufacturers: {
+    type: Array,
     required: true,
   },
 })
+
+// Define an event emitter to send selected manufacturer back to the parent
+const emit = defineEmits(['selectManufacturer'])
 </script>
 
 <template>
-  <RouterLink
-    class="card-link"
-    :to="{ name: 'manufacturer_details', params: { id: manufacturer.manufacturer_id } }">
-      <div class="card">
-        <h3 class="medium-text-size">Manufacturer ID: {{ manufacturer.manufacturer_id }}</h3>
-        <p class="small-text-size">Manufacturer: {{ manufacturer.manufacturer_name }}</p>
-      </div>
-  </RouterLink>
+  <div class="container">
+    <!-- Single table with rows generated from the manufacturers array -->
+    <table class="table table-hover thead-dark">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Manufacturer</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Loop through the manufacturers and display each manufacturer in a row -->
+      <tr
+          v-for="(manufacturer, index) in manufacturers"
+          :key="manufacturer.manufacturer_id"
+          @click="emit('selectManufacturer', manufacturer)"
+          style="cursor: pointer"
+      >
+        <th scope="row">{{ index + 1 }}</th>
+        <td>{{ manufacturer.manufacturer_id }}</td>
+        <td>{{ manufacturer.manufacturer_name }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
-<style scoped>
-.card {
-  width: 200px;
-  margin-bottom: 25px;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-  padding: 2px 16px;
-  border-radius: 5px; /* 5px rounded corners */
-}
-.card:hover {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.4s;
-  transform: scale(1.1);
-}
-.card-link {
-  color: #2c3e50;
-  text-decoration: none;
-}
-.medium-text-size{
-  font-family: sans-serif;
-  font-size: 12pt;
-}
-.small-text-size{
-  font-family: sans-serif;
-  font-size: 10pt;
-}
-</style>
