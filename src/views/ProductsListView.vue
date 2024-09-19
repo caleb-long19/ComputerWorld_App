@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import ProductsDisplay from '../components/ProductsDisplay.vue'
 import ComputerWorldServices from '../services/ComputerWorldServices.js'
+import BaseInput from "../components/Forms/BaseInput.vue"
 
 const products = ref([])
 
@@ -29,6 +30,122 @@ onMounted(() => {
 const selectProduct = (product) => {
   selectedProduct.value = { ...product } // Update with clicked product data
 }
+
+const apiUrl = 'http://localhost:5000'; // Ensure this is correct
+
+// Function to create a product record
+const createRecord = () => {
+  const url = `${apiUrl}/product/`;
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      product_code: selectedProduct.value.product_code,
+      product_name: selectedProduct.value.product_name,
+      manufacturer_id: Number(selectedProduct.value.manufacturer_id),
+      product_stock: Number(selectedProduct.value.product_stock),
+      product_price: parseFloat(selectedProduct.value.product_price),
+    }),
+  })
+      .then((response) => {
+        if (response.ok) {
+          alert('Record created successfully');
+          // Optionally, fetch and update the list of products
+          return ComputerWorldServices.getProducts(); // Refresh list
+        } else {
+          alert('Failed to create product');
+        }
+      })
+      .then((response) => {
+        if (response) {
+          products.value = response.data;
+          clearSelection(); // Clear selection after creation
+        }
+      })
+      .catch((error) => {
+        console.log("THE ERROR IS DISPLAYED HERE:", url, error)
+        console.log('Error:', error);
+        alert('An error occurred while creating Manufacturer');
+      });
+}
+
+// Function to update a product record
+const updateRecord = (id) => {
+  const url = `${apiUrl}/product/${id}`;
+  fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      product_id: selectedProduct.value.product_id,
+      product_code: selectedProduct.value.product_code,
+      product_name: selectedProduct.value.product_name,
+      manufacturer_id: Number(selectedProduct.value.manufacturer_id),
+      product_stock: Number(selectedProduct.value.product_stock),
+      product_price: parseFloat(selectedProduct.value.product_price),
+    }),
+  })
+      .then((response) => {
+        if (response.ok) {
+          alert('Record updated successfully');
+          // Optionally, fetch and update the list of products
+          return ComputerWorldServices.getProducts(); // Refresh list
+        } else {
+          alert('Failed to update product');
+        }
+      })
+      .then((response) => {
+        if (response) {
+          products.value = response.data;
+          clearSelection(); // Clear selection after creation
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+        alert('An error occurred while updating product');
+      });
+}
+
+// Function to delete a product record
+const deleteRecord = (id) => {
+  const url = `${apiUrl}/product/${id}`;
+  fetch(url, {
+    method: 'DELETE',
+  })
+      .then((response) => {
+        if (response.ok) {
+          alert('Record deleted successfully');
+          // Optionally, fetch and update the list of products
+          return ComputerWorldServices.getProducts(); // Refresh list
+        } else {
+          alert('Failed to delete product');
+        }
+      })
+      .then((response) => {
+        if (response) {
+          products.value = response.data;
+          clearSelection(); // Clear selection after creation
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+        alert('An error occurred while deleting product');
+      });
+}
+
+const clearSelection = () => {
+  selectedProduct.value = {
+    product_id: '',
+    product_code: '',
+    product_name: '',
+    manufacturer_id: '',
+    product_stock: '',
+    product_price: '',
+  };
+}
 </script>
 
 <template>
@@ -36,7 +153,6 @@ const selectProduct = (product) => {
     <h1>COMPUTER WORLD</h1>
     <h2>- PRODUCTS -</h2>
   </div>
-
   <!-- Pass products and selection handler to ProductsDisplay -->
   <div class="container">
     <ProductsDisplay
@@ -44,77 +160,73 @@ const selectProduct = (product) => {
         @selectProduct="selectProduct"
     />
   </div>
-
   <!-- Product Manager form populated with selected product data -->
   <div class="container">
     <form>
       <h2>Product Manager</h2>
-      <div class="mb-3">
-        <label class="mb-1" for="productId">Product ID</label>
-        <input
-            type="text"
-            class="form-control"
-            id="productId"
-            v-model="selectedProduct.product_id"
-            placeholder="ID"
-            readonly
-        />
-      </div>
-      <div class="mb-3">
-        <label class="mb-1" for="productCode">Product Code</label>
-        <input
-            type="text"
-            class="form-control"
-            id="productCode"
-            v-model="selectedProduct.product_code"
-            placeholder="Code"
-        />
-      </div>
+        <div class="mb-3" v-if="selectedProduct.product_id">
+            <label class="mb-1" for="productId">Product ID</label>
+            <BaseInput
+                type="text"
+                class="form-control"
+                id="productId"
+                v-model="selectedProduct.product_id"
+                readonly
+            />
+        </div>
+        <div class="mb-3">
+          <label class="mb-1" for="productCode">Product Code</label>
+          <BaseInput
+              type="text"
+              class="form-control"
+              id="productCode"
+              v-model="selectedProduct.product_code"
+          />
+        </div>
         <div class="mb-3">
           <label class="mb-1" for="productName">Product Name</label>
-          <input
+          <BaseInput
               type="text"
               class="form-control"
               id="productName"
               v-model="selectedProduct.product_name"
-              placeholder="Code"
           />
         </div>
         <div class="mb-3">
           <label class="mb-1" for="manufacturerID">Manufacturer ID</label>
-          <input
+          <BaseInput
               type="text"
               class="form-control"
               id="manufacturerID"
               v-model="selectedProduct.manufacturer_id"
-              placeholder="Code"
           />
         </div>
         <div class="mb-3">
           <label class="mb-1" for="stock">Stock</label>
-          <input
+          <BaseInput
               type="text"
               class="form-control"
               id="stock"
               v-model="selectedProduct.product_stock"
-              placeholder="Product Stock"
           />
         </div>
         <div class="mb-3">
           <label class="mb-1" for="price">Price</label>
-          <input
+          <BaseInput
               type="text"
               class="form-control"
               id="price"
               v-model="selectedProduct.product_price"
-              placeholder="Product Price"
           />
         </div>
-      <!-- Buttons are not currently functioning -->
-      <button v-if="selectedProduct.product_id" type="submit" class="btn btn-primary mx-1">Update</button>
-      <button v-if="selectedProduct.product_id" type="submit" class="btn btn-danger mx-1">Delete</button>
-      <button v-if="selectedProduct.product_id" type="submit" class="btn btn-primary mx-1">Clear Selected Record</button>
-      <button v-if="!selectedProduct.product_id" type="submit" class="btn btn-primary">Create</button>
+      <div v-if="selectedProduct.product_id">
+        <button type="button" class="btn btn-primary mx-1" @click="updateRecord(selectedProduct.product_id)">Update</button>
+        <button type="button" class="btn btn-danger mx-1" @click="deleteRecord(selectedProduct.product_id)">Delete</button>
+        <button type="submit" class="btn btn-primary mx-1" @click="clearSelection">Clear Selected Record</button>
+      </div>
+      <div v-else>
+        <button type="submit" class="btn btn-primary" @click="createRecord">Create</button>
+      </div>
     </form>
   </div>
 </template>
@@ -122,7 +234,6 @@ const selectProduct = (product) => {
 <style>
 .layout {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-shadow: 2px 4px #2c3e50;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

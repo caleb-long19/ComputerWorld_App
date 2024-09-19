@@ -12,10 +12,10 @@ const emit = defineEmits(['selectManufacturer'])
 </script>
 
 <template>
-  <div class="container">
+  <div class="container table-responsive">
     <!-- Single table with rows generated from the manufacturers array -->
-    <table class="table table-hover thead-dark">
-      <thead>
+    <table class="table table-hover">
+      <thead class="table-light">
       <tr>
         <th scope="col">#</th>
         <th scope="col">ID</th>
@@ -39,3 +39,8 @@ const emit = defineEmits(['selectManufacturer'])
   </div>
 </template>
 
+<style scoped>
+.table-responsive {
+  max-height:300px;
+}
+</style>/
