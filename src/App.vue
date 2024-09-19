@@ -3,38 +3,16 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-    <header>
-      <div id="layout">
-        <nav>
-          <RouterLink :to="{ name: 'home'}">HOME</RouterLink> |
-          <RouterLink :to="{ name: 'manufacturer_list'}">MANUFACTURERS</RouterLink> |
-          <RouterLink :to="{ name: 'product_list'}">PRODUCTS</RouterLink> |
-          <RouterLink :to="{ name: 'order_list'}">ORDERS</RouterLink>
-        </nav>
-      </div>
+  <div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-1 border-bottom">
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><RouterLink :to="{ name: 'home'}" class="nav-link px-2 link-secondary">HOME</RouterLink></li>
+        <li><RouterLink :to="{ name: 'manufacturer_list'}" class="nav-link px-2 link-dark">MANUFACTURERS</RouterLink></li>
+        <li><RouterLink :to="{ name: 'product_list'}" class="nav-link px-2 link-dark">PRODUCTS</RouterLink></li>
+        <li><RouterLink :to="{ name: 'order_list'}" class="nav-link px-2 link-dark">ORDERS</RouterLink></li>
+      </ul>
+
     </header>
+  </div>
   <RouterView />
 </template>
-
-<style>
-#layout {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-nav {
-  padding: 20px;
-}
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-nav a.router-link-exact-active {
-  color: #FFDB58;
-}
-h2 {
-  font-size: 20px;
-}
-</style>
