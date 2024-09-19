@@ -79,6 +79,8 @@ const updateRecord = (id) => {
         console.log("THIS IS THE URL:", url)
         if (response.ok) {
           alert('Record updated successfully');
+          // Optionally, fetch and update the list of manufacturers
+          return ComputerWorldServices.getManufacturers(); // Refresh list
         } else {
           alert('Failed to update Manufacturer');
         }
@@ -104,6 +106,8 @@ const deleteRecord = (id) => {
       .then((response) => {
         if (response.ok) {
           alert('Record deleted successfully');
+          // Optionally, fetch and update the list of manufacturers
+          return ComputerWorldServices.getManufacturers(); // Refresh list
         } else {
           alert('Failed to delete Manufacturer');
         }
