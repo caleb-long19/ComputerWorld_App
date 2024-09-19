@@ -14,8 +14,8 @@ const emit = defineEmits(['selectProduct'])
 <template>
   <div class="container">
     <!-- Single table with rows generated from the manufacturers array -->
-    <table class="table table-hover thead-dark">
-      <thead>
+    <table class="table table-hover">
+      <thead class="table-warning">
       <tr>
         <th scope="col">#</th>
         <th scope="col">ID</th>
