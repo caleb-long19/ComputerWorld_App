@@ -12,7 +12,7 @@ const selectedOrder = ref({
   order_amount: '',
   product_id: '',
   order_price: '',
-}) // Object to store selected manufacturer details
+}) // Object to store selected order details
 
 
 onMounted(() => {
