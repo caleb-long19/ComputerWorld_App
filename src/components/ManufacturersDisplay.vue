@@ -38,13 +38,3 @@ const emit = defineEmits(['selectManufacturer'])
     </table>
   </div>
 </template>
-
-<style scoped>
-.table-responsive {
-  max-height: 300px;
-}
-.bg-yellow_colour {
-  background-color: yellow;
-}
-
-</style>

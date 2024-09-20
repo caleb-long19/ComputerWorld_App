@@ -56,14 +56,18 @@ body {
     background-color: #f8f9fa;
 }
 
+.table-responsive {
+    max-height: 400px;
+}
+
 /* Font setup */
 @font-face {
     font-family: lemonMilk;
-    src: url("src/assets/fonts/LEMONMILK-Regular.otf");
+    src: url("../../src/assets/fonts/LEMONMILK-Regular.otf");
 }
 @font-face {
     font-family: lemonMilk_bold;
-    src: url("src/assets/fonts/LEMONMILK-bold.otf");
+    src: url("../../src/assets/fonts/LEMONMILK-bold.otf");
 }
 .lemon-font-regular {
     font-family: lemonMilk, sans-serif;

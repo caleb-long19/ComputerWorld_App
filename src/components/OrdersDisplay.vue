@@ -12,7 +12,7 @@ const emit = defineEmits(['selectOrder'])
 </script>
 
 <template>
-  <div class="container">
+  <div class="container table-responsive">
     <!-- Single table with rows generated from the orders array -->
     <table class="table table-hover">
       <thead class="table-warning">
