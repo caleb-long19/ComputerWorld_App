@@ -1,5 +1,76 @@
-.bebas-neue-regular {
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+.layout-title {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #FFDB58;
+}
+hr.dotted {
+    border-top: 5px dotted #999;
+}
+h1 {
+    text-shadow: 2px 2px black;
+}
+.errorMessage {
+    color: red;
+}
+/* Main layout with sidebar and content side by side */
+.main-layout {
+    display: flex;
+    max-height: 100vh;
+}
+/* Sidebar full height */
+.sidebar {
+    width: 350px;
+    background-color: #f8f9fa;
+    height: 100vh; /* Full viewport height */
+}
+/* Content and Footer Area (takes remaining space beside sidebar) */
+.content-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Main content should grow to take available space */
+.content {
+    flex-grow: 1;
+    overflow: auto;
+    padding: 20px;
+}
+.bg-yellow {
+    background-color: #FFDB58;
+}
+hr.dotted {
+    border-top: 5px dotted #999;
+}
+.nav-link-new {
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+body {
+    background-color: #f8f9fa;
+}
+
+/* Font setup */
+@font-face {
+    font-family: lemonMilk;
+    src: url("fonts/LEMONMILK-Regular.otf");
+}
+@font-face {
+    font-family: lemonMilk_bold;
+    src: url("fonts/LEMONMILK-bold.otf");
+}
+.lemon-font-regular {
+    font-family: lemonMilk, sans-serif;
+}
+.lemon-font-bold {
+    font-family: lemonMilk_bold, sans-serif;
+}
+.custom-text-colour {
+    color: #f8f9fa;
 }

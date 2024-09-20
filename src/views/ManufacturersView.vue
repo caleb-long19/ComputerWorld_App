@@ -1,104 +1,103 @@
 <script setup>
-import {manufacturers, fetchManufacturers, createRecord, updateRecord, deleteRecord, selectedManufacturer, selectManufacturer, clearSelection} from "../services/controllers/ManufacturerServices.js"
-import ManufacturersDisplay from "../components/ManufacturersDisplay.vue"
-import BaseInput from "@/components/forms/BaseInput.vue";// Importing the required modules
-import { Ripple, initMDB } from 'mdb-ui-kit';
+import { manufacturers, fetchManufacturers, createRecord, updateRecord, deleteRecord, selectedManufacturer, selectManufacturer, clearSelection } from "../services/controllers/ManufacturerServices.js";
+import ManufacturersDisplay from "../components/ManufacturersDisplay.vue";
 
-fetchManufacturers()
+// vee-validate and Yup imports for validation
+import { useForm, Field, ErrorMessage } from 'vee-validate';
+import * as Yup from 'yup';
 
+// Validation schema for manufacturer name
+const schema = Yup.object({
+  manufacturer_name: Yup.string()
+    .required('Manufacturer Name is required')
+    .matches(/^[a-zA-Z\s]+$/, 'Manufacturer Name cannot contain numbers or special characters'),
+});
 
-// Importing the required modules
+// Set up the form using useForm with validation schema
+const { handleSubmit } = useForm({
+  validationSchema: schema,
+  initialValues: selectedManufacturer.value
+});
 
+// Function to handle form submission
+const onSubmit = handleSubmit((values) => {
+  // Sync form values with selectedManufacturer
+  selectedManufacturer.value = values;
 
-// Initialize MDB with Ripple effect
-initMDB(Ripple);
+  if (selectedManufacturer.value.manufacturer_id) {
+    // Update manufacturer if ID exists
+    updateRecord(selectedManufacturer.value.manufacturer_id);
+  } else {
+    // Create new manufacturer
+    createRecord();
+  }
+});
 
-
+fetchManufacturers();  // Fetch manufacturers when component mounts
 </script>
 
 <template>
-  <div class="layout">
-    <h1 class="custom-font-bold display-4">COMPUTER WORLD</h1>
-    <h5 class="custom-font-regular">- MANUFACTURERS -</h5>
+  <div class="layout-title">
+    <h1 class="lemon-font-bold display-4">COMPUTER WORLD</h1>
+    <h5 class="lemon-font-regular">- MANUFACTURERS -</h5>
     <hr class="dotted" />
   </div>
 
   <!-- Pass manufacturers and selection handler to ManufacturersDisplay -->
   <div class="container">
     <ManufacturersDisplay
-        :manufacturers="manufacturers"
-        @selectManufacturer="selectManufacturer"
+      :manufacturers="manufacturers"
+      @selectManufacturer="selectManufacturer"
     />
   </div>
 
-  <!-- Manufacturer Manager form populated with selected manufacturer data -->
+  <!-- Manufacturer Manager form -->
   <div class="container">
-    <form>
-      <h1>MANUFACTURER MANAGER</h1>
+    <form @submit.prevent="onSubmit">
+      <fieldset>
+        <legend>Manufacturer Manager</legend>
+
+        <!-- Manufacturer ID field -->
         <div class="mb-3" v-if="selectedManufacturer.manufacturer_id">
-          <label class="mb-1" for="manufacturerId">Manufacturer ID</label>
-          <BaseInput
-              type="text"
-              style="width: 300px"
-              class="form-control"
-              id="manufacturerId"
-              v-model="selectedManufacturer.manufacturer_id"
-              placeholder="ID"
-              readonly
+          <label class="mb-1">Manufacturer ID</label>
+          <Field
+            type="text"
+            style="width: 300px"
+            class="form-control"
+            name="manufacturer_id"
+            v-model="selectedManufacturer.manufacturer_id"
+            readonly
           />
         </div>
-      <div class="mb-3">
-        <label class="mb-1" for="manufacturerName">Manufacturer Name</label>
-        <BaseInput
+
+        <!-- Manufacturer Name field -->
+        <div class="mb-3">
+          <label class="mb-1">Manufacturer Name:</label>
+          <!-- Field component for validation, bind to form state -->
+          <Field
             type="text"
+            v-model="selectedManufacturer.manufacturer_name"
+            name="manufacturer_name"
             style="width: 525px"
             class="form-control"
-            id="manufacturerName"
-            v-model="selectedManufacturer.manufacturer_name"
-            placeholder="Name"
-        />
-      </div>
+          />
+        </div>
+
+        <!-- Validation error message -->
+        <div class="mb-3">
+          <ErrorMessage name="manufacturer_name" class="errorMessage" />
+        </div>
+      </fieldset>
+
       <!-- Manufacturer Manager buttons -->
       <div v-if="selectedManufacturer.manufacturer_id">
-        <button type="button" class="btn btn-primary" @click="updateRecord(selectedManufacturer.manufacturer_id)">UPDATE</button> |
+        <button type="submit" class="btn btn-primary">UPDATE</button> |
         <button type="button" class="btn btn-danger" @click="deleteRecord(selectedManufacturer.manufacturer_id)">DELETE</button> |
-        <button type="button" class="btn btn-info"  @click="clearSelection">CLEAR DATA</button>
+        <button type="button" class="btn btn-info" @click="clearSelection">CLEAR DATA</button>
       </div>
       <div v-else>
-        <button type="button" class="btn btn-primary mx-1" @click="createRecord">CREATE</button>
+        <button type="submit" class="btn btn-primary mx-1">CREATE</button>
       </div>
     </form>
   </div>
 </template>
-
-<style>
-.layout {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #FFDB58;
-}
-
-.custom-font-bold {
-  font-family: lemonMilk_bold, sans-serif;
-}
-.custom-font-regular {
-  font-family: lemonMilk, sans-serif;
-}
-hr.dotted {
-  border-top: 5px dotted #999;
-}
-@font-face {
-  font-family: lemonMilk;
-  src: url("src/assets/fonts/LEMONMILK-Regular.otf");
-}
-@font-face {
-  font-family: lemonMilk_bold;
-  src: url("src/assets/fonts/LEMONMILK-bold.otf");
-}
-h1 {
-  text-shadow: 2px 2px black;
-}
-
-@import 'mdb-ui-kit/css/mdb.min.css';
-</style>
