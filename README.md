@@ -28,8 +28,6 @@ to develop an api alongside an application to prepare for developing a large sca
 ## TODO
 ```
 - Token based authentication - Might implement a login/sign-up system so I can implement Token based authentication.
-- Need to properly implement the price column in the Orders table. The price must automatically update based on the order amount and price of the order.
-- Need to implement more tests in the API and make sure it is ready.
 - Finish off User-Interface
 - Talk with other team members for any feedback on the project code and website design.
 ```
