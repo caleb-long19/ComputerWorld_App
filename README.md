@@ -27,9 +27,15 @@ to develop an api alongside an application to prepare for developing a large sca
 
 ## TODO
 ```
-- Token based authentication - Might implement a login/sign-up system so I can implement Token based authentication.
-- Finish off User-Interface
-- Talk with other team members for any feedback on the project code and website design.
+I received plenty of Feedback from Matt and I have spent some time going over the application and making a list of changes that need to be made to fit the standard.
+- Alter all the service files, they should only be implementing try/catch methods (call and retrieve data only).
+- Craft a component that is used to control the data retrieved.
+- Implement Await & Async
+- Take the user to the create page, after creating record, display data and take them to the edit page
+- Implement environment variable and inject into code
+- Don't store data inside of the service
+- Utilise composables and components
+- Remove duplicate code
 ```
 
 ## RECOMMENDED IDE
