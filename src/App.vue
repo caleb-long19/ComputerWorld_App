@@ -13,15 +13,15 @@
             <svg class="bi me-2 bg-light" width="16" height="16"><use xlink:href="#home"></use></svg>HOME</RouterLink>
         </li>
         <li>
-          <RouterLink :to="{ name: 'manufacturer_list'}" class="nav-link-new fs-6">
+          <RouterLink :to="{ name: 'manufacturer-list'}" class="nav-link-new fs-6">
             <svg class="bi me-2 bg-light" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>MANUFACTURERS</RouterLink>
         </li>
         <li>
-          <RouterLink :to="{ name: 'product_list'}" class="nav-link-new fs-6">
+          <RouterLink :to="{ name: 'product-list'}" class="nav-link-new fs-6">
             <svg class="bi me-2 bg-light" width="16" height="16"><use xlink:href="#table"></use></svg>PRODUCTS</RouterLink>
         </li>
         <li>
-          <RouterLink :to="{ name: 'order_list'}" class="nav-link-new fs-6">
+          <RouterLink :to="{ name: 'order-list'}" class="nav-link-new fs-6">
             <svg class="bi me-2 bg-light" width="16" height="16"><use xlink:href="#grid"></use></svg>ORDERS</RouterLink>
         </li>
         <hr class="custom-text-colour">
