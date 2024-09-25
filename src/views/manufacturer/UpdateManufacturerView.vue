@@ -18,7 +18,7 @@ const handleSubmit = async () => {
   const updateNewManufacturer: Manufacturer = {
     manufacturer_name: mfvModel.manufacturer_name,
   }
-  const manufacturerResponse = await updateManufacturer(manufacturerID, updateNewManufacturer) // Create manufacturer
+  const manufacturerResponse = await updateManufacturer(manufacturerID, updateNewManufacturer) // Update manufacturer
   await router.push(`/manufacturer/${manufacturerResponse.manufacturer_id}`) // Re-routes the user to the manufacturer view page - displays updated manufacturer
 }
 

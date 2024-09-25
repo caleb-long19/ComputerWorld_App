@@ -22,8 +22,8 @@ const handleSubmit = async () => {
     order_amount: parseInt(ovModel.order_amount),
     product_id: parseInt(ovModel.product_id),
   }
-  const orderResponse = await updateOrder(orderID, updateNewOrder) // Create manufacturer
-  await router.push(`/order/${orderResponse.order_id}`) // Re-routes the user to the manufacturer view page - displays updated manufacturer
+  const orderResponse = await updateOrder(orderID, updateNewOrder) // Update order
+  await router.push(`/order/${orderResponse.order_id}`) // Re-routes the user to the order view page - displays updated order
 }
 
 const order = ref<Order>()
@@ -42,9 +42,6 @@ onMounted(async () => {
     <h5 class="lemon-font-regular">- Update Order -</h5>
     <hr class="dotted" />
   </div>
-
-  <!-- Need to create a form that will take the data and store it in the database upon create
-     Need to validate the data before sending it to the database -->
 
   <div class="container">
     <h2>Order Update Manager</h2>

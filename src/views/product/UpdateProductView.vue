@@ -26,8 +26,8 @@ const handleSubmit = async () => {
     product_stock: parseInt(pvModel.product_stock),
     product_price: parseFloat(pvModel.product_price),
   }
-  const productResponse = await updateProduct(productID, updateNewProduct) // Create manufacturer
-  await router.push(`/product/${productResponse.product_id}`) // Re-routes the user to the manufacturer view page - displays updated manufacturer
+  const productResponse = await updateProduct(productID, updateNewProduct) // Update product
+  await router.push(`/product/${productResponse.product_id}`) // Re-routes the user to the product view page - displays updated product
 }
 
 const product = ref<Product>()
@@ -48,9 +48,6 @@ onMounted(async () => {
     <h5 class="lemon-font-regular">- Update Product -</h5>
     <hr class="dotted" />
   </div>
-
-  <!-- Need to create a form that will take the data and store it in the database upon create
-     Need to validate the data before sending it to the database -->
 
   <div class="container">
     <h2>Product Manager</h2>
