@@ -1,27 +1,27 @@
-import ProductView from '@/views/ProductView.vue'
-import ProductListView from '@/views/ProductListView.vue'
-import AddProductsView from '@/views/AddProductsView.vue'
-import EditProductView from '@/views/EditProductView.vue'
+import ProductView from '@/views/product/ProductView.vue'
+import ProductListView from '@/views/product/ProductListView.vue'
+import CreateProductsView from '@/views/product/CreateProductsView.vue'
+import UpdateProductView from '@/views/product/UpdateProductView.vue'
 
 export const productRoutes = [
   {
-    path: '/products',
+    path: '/product',
     name: 'product-list',
     component: ProductListView
   },
   {
-    path: '/products/:id',
+    path: '/product/:id',
     name: 'product',
     component: ProductView
   },
   {
-    path: '/products/add',
-    name: 'product-add',
-    component: AddProductsView
+    path: '/product/create',
+    name: 'create-product',
+    component: CreateProductsView
   },
   {
-    path: '/products/edit',
-    name: 'product-edit',
-    component: EditProductView
+    path: '/product/:id/update',
+    name: 'update-product',
+    component: UpdateProductView
   }
 ]

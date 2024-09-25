@@ -1,4 +1,4 @@
-import type { Manufacturer } from '@/models/Manufacturer';
+import type { Manufacturer } from '@/models/manufacturer';
 
 interface Product {
   product_id: number

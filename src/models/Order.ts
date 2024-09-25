@@ -1,4 +1,4 @@
-import type { Product } from '@/models/Product.ts'
+import type { Product } from '@/models/product.ts'
 
 interface Order {
   order_id: number

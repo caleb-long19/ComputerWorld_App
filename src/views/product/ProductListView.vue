@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Product } from '@/models/Product.ts'
+import { Product } from '@/models/Product.js'
 import { onMounted, ref } from 'vue'
 import ProductTable from '@/components/ProductsTable.vue'
 import { getAllProducts } from '@/services/ProductService'
@@ -29,10 +29,13 @@ onMounted(async () => {
     <hr class="dotted" />
   </div>
 
-  <div>
+  <div class="container">
     <ProductTable
       :products="products"
+      @deleteProduct="fetchProducts"
     />
+    <button class="btn btn-info">
+      <RouterLink :to="{ name: 'create-product'}" class="nav-link">Create Product</RouterLink>
+    </button>
   </div>
-
 </template>

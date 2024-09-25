@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Manufacturer } from '@/models/Manufacturer.ts'
+import { Manufacturer } from '@/models/Manufacturer.js'
 import { onMounted, ref } from 'vue'
 import ManufacturersTable from '@/components/ManufacturersTable.vue'
 import { getAllManufacturers } from '@/services/ManufacturerService'
@@ -31,15 +31,13 @@ onMounted(async () => {
     <hr class="dotted" />
   </div>
 
-  <div>
+  <div class="container">
     <ManufacturersTable
       :manufacturers="manufacturers"
-      @selectManufacturer="selectManufacturer"
+      @deleteManufacturer="fetchManufacturers"
     />
+    <button class="btn btn-info">
+      <RouterLink :to="{ name: 'create-manufacturer'}" class="nav-link">Create Manufacturer</RouterLink>
+    </button>
   </div>
-
-  <div>
-    <button >Create Manufacturer</button>
-  </div>
-
 </template>

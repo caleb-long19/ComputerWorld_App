@@ -74,3 +74,11 @@ body {
 .custom-text-colour {
     color: #f8f9fa;
 }
+.tableFixHead {
+    overflow: auto;
+    height: 340px;
+}
+.tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1; }

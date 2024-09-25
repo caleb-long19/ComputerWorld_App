@@ -19,7 +19,6 @@ const fetchOrders = async () => {
 onMounted(async () => {
   await fetchOrders()
 })
-
 </script>
 
 <template>
@@ -29,10 +28,13 @@ onMounted(async () => {
     <hr class="dotted" />
   </div>
 
-  <div>
+  <div class="container">
     <OrderTable
       :orders="orders"
+      @deleteOrder="fetchOrders"
     />
+    <button class="btn btn-info">
+      <RouterLink :to="{ name: 'create-order'}" class="nav-link">Create Order</RouterLink>
+    </button>
   </div>
-
 </template>
