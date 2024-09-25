@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Manufacturer } from '@/models/Manufacturer.ts'
 import { onMounted, ref } from 'vue'
-import ManufacturersCard from '@/components/ManufacturersTable.vue'
+import ManufacturersTable from '@/components/ManufacturersTable.vue'
 import { getAllManufacturers } from '@/services/ManufacturerService'
 
 // Initialize manufacturers
@@ -15,6 +15,8 @@ const fetchManufacturers = async () => {
     console.error("Failed to fetch manufacturers:", error)
   }
 }
+
+// NEED TO IMPLEMENT THE SELECTED DATA AGAIN
 
 onMounted(async () => {
   await fetchManufacturers()
@@ -30,10 +32,14 @@ onMounted(async () => {
   </div>
 
   <div>
-    <ManufacturersCard
+    <ManufacturersTable
       :manufacturers="manufacturers"
       @selectManufacturer="selectManufacturer"
     />
+  </div>
+
+  <div>
+    <button >Create Manufacturer</button>
   </div>
 
 </template>
