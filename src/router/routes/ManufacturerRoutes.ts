@@ -1,7 +1,7 @@
-import ManufacturerView from '@/views/ManufacturerView.vue'
-import ManufacturerListView from '@/views/ManufacturerListView.vue'
-import AddManufacturerView from '@/views/AddManufacturerView.vue'
-import EditManufacturerView from '@/views/EditManufacturerView.vue'
+import ManufacturerView from '@/views/manufacturer/ManufacturerView.vue'
+import ManufacturerListView from '@/views/manufacturer/ManufacturerListView.vue'
+import CreateManufacturerView from '@/views/manufacturer/CreateManufacturerView.vue'
+import UpdateManufacturerView from '@/views/manufacturer/UpdateManufacturerView.vue'
 
 export const manufacturerRoutes = [
   {
@@ -15,13 +15,13 @@ export const manufacturerRoutes = [
     component: ManufacturerView
   },
   {
-    path: '/manufacturer/add',
-    name: 'add-manufacturer',
-    component: AddManufacturerView
+    path: '/manufacturer/create',
+    name: 'create-manufacturer',
+    component: CreateManufacturerView
   },
   {
-    path: '/manufacturer/:id/edit',
-    name: 'edit-manufacturer',
-    component: EditManufacturerView
+    path: '/manufacturer/:id/update',
+    name: 'update-manufacturer',
+    component: UpdateManufacturerView
   }
 ]

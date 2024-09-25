@@ -1,27 +1,27 @@
-import OrderView from '@/views/OrderView.vue'
-import OrderListView from '@/views/OrderListView.vue'
-import AddOrdersView from '@/views/AddOrdersView.vue'
-import EditOrderView from '@/views/EditOrderView.vue'
+import OrderView from '@/views/order/OrderView.vue'
+import OrderListView from '@/views/order/OrderListView.vue'
+import CreateOrdersView from '@/views/order/CreateOrdersView.vue'
+import UpdateOrderView from '@/views/order/UpdateOrderView.vue'
 
 export const orderRoutes = [
   {
-    path: '/orders',
+    path: '/order',
     name: 'order-list',
     component: OrderListView
   },
   {
-    path: '/orders/:id',
+    path: '/order/:id',
     name: 'order',
     component: OrderView
   },
   {
-    path: '/orders/add',
-    name: 'add-order',
-    component: AddOrdersView
+    path: '/order/create',
+    name: 'create-order',
+    component: CreateOrdersView
   },
   {
-    path: '/orders/:id/edit',
-    name: 'edit-order',
-    component: EditOrderView
+    path: '/order/:id/update',
+    name: 'update-order',
+    component: UpdateOrderView
   }
 ]

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { Manufacturer } from '@/models/Manufacturer.ts'
+import { Manufacturer } from '@/models/Manufacturer.js'
 import { onMounted, ref } from 'vue'
-import ManufacturersCard from '@/components/ManufacturersTable.vue'
+import ManufacturersTable from '@/components/ManufacturersTable.vue'
 import { getAllManufacturers } from '@/services/ManufacturerService'
 
 // Initialize manufacturers
@@ -16,6 +16,8 @@ const fetchManufacturers = async () => {
   }
 }
 
+// NEED TO IMPLEMENT THE SELECTED DATA AGAIN
+
 onMounted(async () => {
   await fetchManufacturers()
 })
@@ -29,11 +31,13 @@ onMounted(async () => {
     <hr class="dotted" />
   </div>
 
-  <div>
-    <ManufacturersCard
+  <div class="container">
+    <ManufacturersTable
       :manufacturers="manufacturers"
-      @selectManufacturer="selectManufacturer"
+      @deleteManufacturer="fetchManufacturers"
     />
+    <button class="btn btn-info">
+      <RouterLink :to="{ name: 'create-manufacturer'}" class="nav-link">Create Manufacturer</RouterLink>
+    </button>
   </div>
-
 </template>
