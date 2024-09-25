@@ -29,8 +29,8 @@ const handleSubmit = async () => {
     <hr class="dotted" />
   </div>
 
-  <!-- Need to create a form that will take the data and store it in the database upon create
-     Need to validate the data before sending it to the database -->
+  <!-- Need to validate the data before sending it to the database -->
+  <!-- Need to perform error handling e.g. check form values -->
 
   <div class="container">
     <h2>Order Manager</h2>

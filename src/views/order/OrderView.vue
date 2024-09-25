@@ -23,9 +23,20 @@ onMounted(async () => {
     <hr class="dotted" />
   </div>
 
-  <div>
+  <div class="container">
     <h1>Order Data</h1>
-    <h3>Order: {{ orderID }}</h3>
+    <div v-if="order">
+      <h5>Order ID: {{ order.order_id }}</h5>
+      <h5>Order Reference: {{ order.order_ref }}</h5>
+      <h5>Order Amount: {{ order.order_amount }}</h5>
+      <h5>Product ID: {{ order.product_id }}</h5>
+      <h5>Order Price: {{ order.order_price}}</h5>
+      <button class="btn btn-info">
+        <RouterLink :to="{ name: 'update-order'}" class="nav-link">Update Order</RouterLink>
+      </button>
+    </div>
+    <div v-else>
+      <p>Loading order data...</p>
+    </div>
   </div>
-
 </template>

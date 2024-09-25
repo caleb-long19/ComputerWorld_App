@@ -23,9 +23,17 @@ onMounted(async () => {
     <hr class="dotted" />
   </div>
 
-  <div>
+  <div class="container">
     <h1>Manufacturer Data</h1>
-    <h3>Manufacturer: {{ manufacturerID }}</h3>
+    <div v-if="manufacturer">
+    <h3>Manufacturer ID: {{ manufacturer.manufacturer_id }}</h3>
+      <h3>Manufacturer Name: {{ manufacturer.manufacturer_name }}</h3>
+    <button class="btn btn-info">
+      <RouterLink :to="{ name: 'update-manufacturer'}" class="nav-link">Update Manufacturer</RouterLink>
+    </button>
+    </div>
+    <div v-else>
+      <p>Loading manufacturer data...</p>
+    </div>
   </div>
-
 </template>
