@@ -31,15 +31,14 @@ onMounted(async () => {
     <h1 class="lemon-font-bold display-4">COMPUTER WORLD</h1>
     <h5 class="lemon-font-regular">- Product -</h5>
     <hr class="dotted" />
-  </div>
-
-  <div class="container">
-    <ProductTable
-      :products="products"
-      @deleteProduct="fetchProducts"
-    />
-    <button class="btn btn-info">
-      <RouterLink :to="{ name: 'create-product'}" class="nav-link">Create Product</RouterLink>
-    </button>
+    <div class="container">
+      <ProductTable
+        :products="products"
+        @deleteProduct="fetchProducts"
+      />
+      <button class="btn btn-info">
+        <RouterLink :to="{ name: 'create-product'}" class="nav-link">Create Product</RouterLink>
+      </button>
+    </div>
   </div>
 </template>

@@ -19,7 +19,7 @@ export const createOrder = async (order: Order) => {
 export const getOrder = async (id: number): Promise<Order[]> => {
   try {
     const { data } = await axios.get(`/api/order/${id}`)
-    toast.success('Product has been fetched!');
+    toast.success('Order has been fetched!');
     return data
   } catch (error) {
     console.error('Error: Could not get order!', error)
@@ -30,7 +30,7 @@ export const getOrder = async (id: number): Promise<Order[]> => {
 export const getAllOrders = async (): Promise<Order[]> => {
   try {
     const { data } = await axios.get(`/api/order/`)
-    toast.success('Products have been fetched!');
+    toast.success('Orders have been fetched!');
     return data
   } catch (error) {
     console.error('Error: Could not get orders!', error)
@@ -41,7 +41,7 @@ export const getAllOrders = async (): Promise<Order[]> => {
 export const updateOrder = async (id: number, order: Order) => {
   try{
     const { data } = await axios.put(`/api/order/${id}`, order)
-    toast.success('Product has been updated!');
+    toast.success('Order has been updated!');
     return data as Order
   } catch (error) {
     console.error('Error: Could not update order!', error)

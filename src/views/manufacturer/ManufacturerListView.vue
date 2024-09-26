@@ -30,7 +30,6 @@ onMounted(async () => {
     <h1 class="lemon-font-bold display-4">COMPUTER WORLD</h1>
     <h5 class="lemon-font-regular">- Manufacturer -</h5>
     <hr class="dotted" />
-
     <div class="container">
       <ManufacturersTable
         :manufacturers="manufacturers"
