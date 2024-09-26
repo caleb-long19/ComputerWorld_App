@@ -7,7 +7,7 @@ import { getProduct } from '@/services/ProductService'
 const route = useRoute()
 const productID = route.params.id
 
-// Initialize manufacturers
+// Initialize products
 const product = ref<Product>(null)
 
 onMounted(async () => {

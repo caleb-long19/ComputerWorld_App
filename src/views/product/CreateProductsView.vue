@@ -22,7 +22,7 @@ const handleSubmit = async () => {
     product_price: parseFloat(pvModel.product_price),
   }
   const productResponse = await createProduct(createNewProduct) // Create product
-  await router.push(`/product/${productResponse.product_name}`) // Re-routes the user to the product view page - displays newly created product
+  await router.push(`/product/${productResponse.product_id}`) // Re-routes the user to the product view page - displays newly created product
 }
 </script>
 

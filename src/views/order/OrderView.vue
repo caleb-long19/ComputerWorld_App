@@ -7,7 +7,7 @@ import { getOrder } from '@/services/OrderService'
 const route = useRoute()
 const orderID = route.params.id
 
-// Initialize manufacturers
+// Initialize orders
 const order = ref<Order>(null)
 
 onMounted(async () => {

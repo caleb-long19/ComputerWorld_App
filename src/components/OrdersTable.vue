@@ -3,6 +3,8 @@
 // Define props to accept an array of orders
 import { Order } from '@/models/Order'
 import { deleteOrder } from '@/services/OrderService'
+import { deleteProduct } from '@/services/ProductService'
+import { toast } from 'react-toastify'
 
 defineProps({
   orders: {
@@ -13,6 +15,20 @@ defineProps({
 
 // Define an event emitter to delete selected order
 const emit = defineEmits(['deleteOrder'])
+
+const handleDelete = async (orderID: number) => {
+  const confirmDeletion = window.confirm('Are you sure you want to delete this order?')
+  if (confirmDeletion) {
+    try {
+      await deleteOrder(orderID)
+      emit('deleteOrder')  // Emit the event to update the order list
+    } catch (error) {
+      console.error('Error deleting order:', error)
+      toast.error('Error: Could not delete order!')
+    }
+  }
+}
+
 </script>
 
 
@@ -47,16 +63,13 @@ const emit = defineEmits(['deleteOrder'])
         <td>{{ order.order_price }}</td>
         <td>
           <!-- Take user to OrderView with ID value selected -->
-          <a class="btn btn-success" :href="`/order/${order.order_id}`"  role="button">View</a>
+          <button class="btn btn-success">
+            <RouterLink :to="`/order/${order.order_id}`" class="nav-link">View</RouterLink>
+          </button>
         </td>
         <td>
           <button
-            @click="
-            async () => {
-              await deleteOrder(order.order_id)
-              emit('deleteOrder')
-            }
-            "
+            @click="() => handleDelete(order.order_id)"
             class="btn btn-danger btn-xs">Delete</button>
         </td>
       </tr>

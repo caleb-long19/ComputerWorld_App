@@ -3,6 +3,9 @@ import { Manufacturer } from '@/models/Manufacturer.js'
 import { onMounted, ref } from 'vue'
 import ManufacturersTable from '@/components/ManufacturersTable.vue'
 import { getAllManufacturers } from '@/services/ManufacturerService'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 // Initialize manufacturers
 const manufacturers = ref<Manufacturer[]>([])
@@ -11,17 +14,16 @@ const fetchManufacturers = async () => {
   try{
     manufacturers.value = await getAllManufacturers()
     console.log("Fetched manufacturers:", manufacturers.value);
+    toast.success('Manufacturers have been fetched!');
   } catch (error) {
     console.error("Failed to fetch manufacturers:", error)
+    toast.error('Error: Could not fetch manufacturers')
   }
 }
-
-// NEED TO IMPLEMENT THE SELECTED DATA AGAIN
 
 onMounted(async () => {
   await fetchManufacturers()
 })
-
 </script>
 
 <template>

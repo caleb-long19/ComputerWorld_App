@@ -1,5 +1,8 @@
 import axios from 'axios'
 import type { Manufacturer } from '@/models/manufacturer'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()  // Initialize toast
 
 export const createManufacturer = async (manufacturer: Manufacturer) => {
   try{
@@ -7,6 +10,7 @@ export const createManufacturer = async (manufacturer: Manufacturer) => {
     return data as Manufacturer
   } catch (error) {
     console.error('Error: Could not create manufacturer', error)
+    toast.error('Error: Could not create manufacturer', error)
   }
 }
 
@@ -16,6 +20,7 @@ export const getManufacturer = async (id: number): Promise<Manufacturer[]> => {
     return data
   } catch (error) {
     console.error('Error: Could not get manufacturer', error)
+    toast.error('Error: Could not get manufacturer')
   }
 }
 
@@ -25,6 +30,7 @@ export const getAllManufacturers = async (): Promise<Manufacturer[]> => {
     return data
   } catch (error) {
     console.error('Error: Could not get manufacturers', error)
+    toast.error('Error: Could not get manufacturers')
   }
 }
 
@@ -34,16 +40,16 @@ export const updateManufacturer = async (id: number, manufacturer: Manufacturer)
     return data as Manufacturer
   } catch (error) {
     console.error('Error: Could not update manufacturer', error)
+    toast.error('Error: Could not update manufacturer')
   }
 }
 
 export const deleteManufacturer = async (manufacturerID) => {
   try{
-    const confirmDeletion = window.confirm('Delete selected manufacturer?')
-    if (confirmDeletion) {
-      await axios.delete(`/api/manufacturer/${manufacturerID}`)
-    }
+    await axios.delete(`/api/manufacturer/${manufacturerID}`)
+    toast.success('Manufacturer deleted successfully.')
   } catch (error) {
     console.error('Error: Could not delete manufacturer', error)
+    toast.error('Error: Could not delete manufacturer')
   }
 }
