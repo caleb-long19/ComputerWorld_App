@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import { Field } from 'vee-validate'
-import { onMounted, reactive, ref } from 'vue'
 import router from '@/router'
+import { Field, ErrorMessage, useForm } from 'vee-validate'
+import { onMounted, reactive, ref } from 'vue'
 import { getManufacturer, updateManufacturer } from '@/services/ManufacturerService.js'
-import { Manufacturer } from '@/models/Manufacturer.js'
+import { useToast } from 'vue-toastification'
 import { useRoute } from 'vue-router'
+
+import { Manufacturer } from '@/models/Manufacturer.js'
+import { manufacturerSchema } from '@/validation/manufacturerSchema'
+
+const toast = useToast()
 
 // Retrieve manufacturer ID
 const route = useRoute()
@@ -14,13 +19,24 @@ const mfvModel = reactive({
   manufacturer_name: '',
 })
 
-const handleSubmit = async () => {
+// Use vee-validate useForm - handles the form
+const { handleSubmit, errors } = useForm({
+  validationSchema: manufacturerSchema,
+});
+
+const onSubmit = async (values: { manufacturer_name: string }) => {
   const updateNewManufacturer: Manufacturer = {
-    manufacturer_name: mfvModel.manufacturer_name,
+    manufacturer_name: values.manufacturer_name,
+  };
+  try {
+    const manufacturerResponse = await updateManufacturer(manufacturerID, updateNewManufacturer) // Update manufacturer
+    toast.success('Manufacturer created successfully!');
+    await router.push(`/manufacturer/${manufacturerResponse.manufacturer_id}`) // Re-routes the user to the manufacturer view page - displays updated manufacturer
+  } catch (error) {
+    console.error('Error updating manufacturer:', error);
+    toast.error('Error updating manufacturer. Please try again.');
   }
-  const manufacturerResponse = await updateManufacturer(manufacturerID, updateNewManufacturer) // Update manufacturer
-  await router.push(`/manufacturer/${manufacturerResponse.manufacturer_id}`) // Re-routes the user to the manufacturer view page - displays updated manufacturer
-}
+};
 
 const manufacturer = ref<Manufacturer>()
 
@@ -28,6 +44,9 @@ onMounted(async () => {
   manufacturer.value = await getManufacturer(manufacturerID)
   mfvModel.manufacturer_name = manufacturer.value.manufacturer_name
 })
+
+// Wrapping the submission function with handleSubmit
+const submitForm = handleSubmit(onSubmit);
 </script>
 
 <template>
@@ -42,7 +61,7 @@ onMounted(async () => {
 
   <div class="container">
     <h2>Manufacturer Update Manager</h2>
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="submitForm">
       <fieldset>
         <div>
           <label class="mb-1">Manufacturer Name:</label>
@@ -54,6 +73,9 @@ onMounted(async () => {
             name="manufacturer_name"
             placeholder="Microsoft"
           />
+        </div>
+        <div class="mb-3">
+          <ErrorMessage name="manufacturer_name" class="errorMessage" />
         </div>
       </fieldset>
       <div>

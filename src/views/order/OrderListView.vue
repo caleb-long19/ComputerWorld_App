@@ -13,10 +13,10 @@ const orders = ref<Order[]>([])
 const fetchOrders = async () => {
   try{
     orders.value = await getAllOrders()
-    console.log("Fetched products:", products.value);
+    console.log("Fetched orders:", orders.value);
     toast.success('Orders have been fetched!');
   } catch (error) {
-    console.log("Failed to fetch products:", error)
+    console.log("Failed to fetch orders:", error)
     toast.error('Error: Could not fetch orders')
   }
 }
