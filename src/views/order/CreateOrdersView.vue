@@ -18,7 +18,7 @@ const handleSubmit = async () => {
     product_id: parseInt(ovModel.product_id),
   }
   const orderResponse = await createOrder(createNewOrder) // Create product
-  await router.push(`/order/${orderResponse.order_ref}`) // Re-routes the user to the product view page - displays newly created product
+  await router.push(`/order/${orderResponse.order_id}`) // Re-routes the user to the product view page - displays newly created product
 }
 </script>
 

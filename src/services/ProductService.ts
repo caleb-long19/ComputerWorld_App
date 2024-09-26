@@ -1,5 +1,9 @@
 import axios from 'axios'
 import type { Product } from '@/models/product'
+import { useToast } from 'vue-toastification'
+
+// Initialize toast
+const toast = useToast()
 
 export const createProduct = async (product: Product) => {
   try{
@@ -7,6 +11,7 @@ export const createProduct = async (product: Product) => {
     return data as Product
   } catch (error) {
     console.error('Error: Could not create product', error)
+    toast.error('Error: Could not create product')
   }
 }
 
@@ -16,6 +21,7 @@ export const getProduct = async (id: number): Promise<Product[]> => {
     return data
   } catch (error) {
     console.error('Error: Could not get product', error)
+    toast.error('Error: Could not get product')
   }
 }
 
@@ -25,6 +31,7 @@ export const getAllProducts = async (): Promise<Product[]> => {
     return data
   } catch (error) {
     console.error('Error: Could not get products', error)
+    toast.error('Error: Could not get products')
   }
 }
 
@@ -34,16 +41,16 @@ export const updateProduct = async (id: number, product: Product) => {
     return data as Product
   } catch (error) {
     console.error('Error: Could not update product', error)
+    toast.error('Error: Could not update product')
   }
 }
 
 export const deleteProduct = async (productID) => {
   try{
-    const confirmDeletion = window.confirm('Delete selected product?')
-    if (confirmDeletion) {
-      await axios.delete(`/api/product/${productID}`)
-    }
+    await axios.delete(`/api/product/${productID}`)
+    toast.success('Product deleted successfully.')
   } catch (error) {
     console.error('Error: Could not delete product', error)
+    toast.error('Error: Could not delete product')
   }
 }

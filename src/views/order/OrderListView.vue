@@ -3,16 +3,21 @@ import { Order } from '@/models/Order'
 import { onMounted, ref } from 'vue'
 import OrderTable from '@/components/OrdersTable.vue'
 import { getAllOrders } from '@/services/OrderService'
+import { useToast } from 'vue-toastification'
 
-// Initialize manufacturers
+const toast = useToast()
+
+// Initialize orders
 const orders = ref<Order[]>([])
 
 const fetchOrders = async () => {
   try{
     orders.value = await getAllOrders()
     console.log("Fetched products:", products.value);
+    toast.success('Orders have been fetched!');
   } catch (error) {
-    console.error("Failed to fetch products:", error)
+    console.log("Failed to fetch products:", error)
+    toast.error('Error: Could not fetch orders')
   }
 }
 

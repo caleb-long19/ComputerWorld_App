@@ -23,6 +23,8 @@ onMounted(async () => {
     <hr class="dotted" />
   </div>
 
+  <!-- The data needs to be centered and maybe placed in a card. Formatting is required -->
+
   <div class="container">
     <h1>Manufacturer Data</h1>
     <div v-if="manufacturer">

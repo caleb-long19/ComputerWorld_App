@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Product } from '@/models/Product'
 import { deleteProduct } from '@/services/ProductService'
+import { toast } from 'react-toastify'
 
 // Define props to accept an object of products
 defineProps({
@@ -12,6 +13,20 @@ defineProps({
 
 // Define an event emitter to delete selected product
 const emit = defineEmits(['deleteProduct'])
+
+const handleDelete = async (productID: number) => {
+  const confirmDeletion = window.confirm('Are you sure you want to delete this product?')
+  if (confirmDeletion) {
+    try {
+      await deleteProduct(productID)
+      emit('deleteProduct')  // Emit the event to update the product list
+    } catch (error) {
+      console.error('Error deleting product:', error)
+      toast.error('Error: Could not delete product!')
+    }
+  }
+}
+
 </script>
 
 
@@ -48,16 +63,13 @@ const emit = defineEmits(['deleteProduct'])
         <td>{{ product.product_price }}</td>
         <td>
           <!-- Take user to OrderView with ID value selected -->
-          <a class="btn btn-success" :href="`/product/${product.product_id}`"  role="button">View</a>
+          <button class="btn btn-success">
+            <RouterLink :to="`/product/${product.product_id}`" class="nav-link">View</RouterLink>
+          </button>
         </td>
         <td>
           <button
-            @click="
-            async () => {
-              await deleteProduct(product.product_id)
-              emit('deleteProduct')
-            }
-            "
+            @click="() => handleDelete(product.product_id)"
             class="btn btn-danger btn-xs">Delete</button>
         </td>
       </tr>

@@ -1,5 +1,9 @@
 import axios from 'axios'
 import type { Order } from '@/models/Order'
+import { useToast } from 'vue-toastification'
+
+// Initialize toast
+const toast = useToast()
 
 export const createOrder = async (order: Order) => {
   try{
@@ -7,6 +11,7 @@ export const createOrder = async (order: Order) => {
     return data as Order
   } catch (error) {
     console.error('Error: Could not create order', error)
+    toast.error('Error: Could not create order')
   }
 }
 
@@ -16,6 +21,7 @@ export const getOrder = async (id: number): Promise<Order[]> => {
     return data
   } catch (error) {
     console.error('Error: Could not get order', error)
+    toast.error('Error: Could not get order')
   }
 }
 
@@ -25,6 +31,7 @@ export const getAllOrders = async (): Promise<Order[]> => {
     return data
   } catch (error) {
     console.error('Error: Could not get orders', error)
+    toast.error('Error: Could not get orders')
   }
 }
 
@@ -34,16 +41,16 @@ export const updateOrder = async (id: number, order: Order) => {
     return data as Order
   } catch (error) {
     console.error('Error: Could not update order', error)
+    toast.error('Error: Could not update order')
   }
 }
 
 export const deleteOrder = async (orderID) => {
   try{
-    const confirmDeletion = window.confirm('Delete selected order?')
-    if (confirmDeletion) {
-      await axios.delete(`/api/order/${orderID}`)
-    }
+    await axios.delete(`/api/order/${orderID}`)
+    toast.success('Order deleted successfully.')
   } catch (error) {
     console.error('Error: Could not delete order', error)
+    toast.error('Error: Could not delete order')
   }
 }
