@@ -7,6 +7,7 @@
     <h1 class="lemon-font-bold display-4">COMPUTER WORLD</h1>
     <h5 class="lemon-font-regular">- HOME PAGE -</h5>
     <hr class="dotted" />
+    <h1 class="lemon-font-regular">WELCOME TO COMPUTER WORLD</h1>
   </div>
 </template>
 

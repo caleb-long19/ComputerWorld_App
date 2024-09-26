@@ -19,7 +19,7 @@ export default {
     <div :class="['sidebar', { 'sidebar-closed': !isSidebarVisible }]" class="d-flex flex-column p-3 bg-yellow shadow-lg">
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark custom-font-bold text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-        <span class="fs-5 custom-text-colour" v-if="isSidebarVisible">COMPUTER WORLD</span>
+        <span class="fs-5 custom-text-colour lemon-font-bold" v-if="isSidebarVisible">COMPUTER WORLD</span>
       </a>
       <hr class="dotted custom-text-colour" v-if="isSidebarVisible">
 
