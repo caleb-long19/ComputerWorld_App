@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import { Field } from 'vee-validate'
-import { onMounted, reactive, ref } from 'vue'
 import router from '@/router'
+import { Field, ErrorMessage, useForm } from 'vee-validate'
+import { onMounted, reactive, ref } from 'vue'
 import { getProduct, updateProduct } from '@/services/ProductService'
-import { Product } from '@/models/Product'
+import { useToast } from 'vue-toastification'
 import { useRoute } from 'vue-router'
+
+import { Product } from '@/models/Product'
+import { productSchema } from '@/validation/productSchema'
+
+const toast = useToast()
 
 // Retrieve manufacturer ID
 const route = useRoute()
@@ -18,17 +23,28 @@ const pvModel = reactive({
   product_price: '',
 })
 
-const handleSubmit = async () => {
+// Use vee-validate useForm - handles the form
+const { handleSubmit, errors } = useForm({
+  validationSchema: productSchema,
+});
+
+const onSubmit = async (values: { product_code: string, product_name: string, manufacturer_id: string, product_stock: string, product_price: string}) => {
   const updateNewProduct: Product = {
-    product_code: pvModel.product_code,
-    product_name: pvModel.product_name,
-    manufacturer_id: parseInt(pvModel.manufacturer_id),
-    product_stock: parseInt(pvModel.product_stock),
-    product_price: parseFloat(pvModel.product_price),
+    product_code: values.product_code,
+    product_name: values.product_name,
+    manufacturer_id: parseFloat(values.manufacturer_id),
+    product_stock: parseInt(values.product_stock),
+    product_price: parseFloat(values.product_price),
+  };
+  try {
+    const productResponse = await updateProduct(updateNewProduct) // Create product
+    toast.success('Product updated successfully!');
+    await router.push(`/order/${productResponse.product_id}`) // Navigate to the product view page
+  } catch (error) {
+    console.error('Error updating product:', error);
+    toast.error('Error updating product. Please try again.');
   }
-  const productResponse = await updateProduct(productID, updateNewProduct) // Update product
-  await router.push(`/product/${productResponse.product_id}`) // Re-routes the user to the product view page - displays updated product
-}
+};
 
 const product = ref<Product>()
 
@@ -40,6 +56,9 @@ onMounted(async () => {
   pvModel.product_stock = product.value.product_stock
   pvModel.product_price = product.value.product_price
 })
+
+// Wrapping the submission function with handleSubmit
+const submitForm = handleSubmit(onSubmit);
 </script>
 
 <template>
@@ -51,8 +70,9 @@ onMounted(async () => {
 
   <div class="container">
     <h2>Product Manager</h2>
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="submitForm">
       <fieldset>
+        <!-- Product Name field -->
         <div>
           <label class="mb-1">Product Code:</label>
           <Field
@@ -64,6 +84,11 @@ onMounted(async () => {
             placeholder="XB04JFF"
           />
         </div>
+        <div class="mb-3">
+          <ErrorMessage name="product_code" class="errorMessage" />
+        </div>
+
+        <!-- Product Name field -->
         <div>
           <label class="mb-1">Product Name:</label>
           <Field
@@ -75,6 +100,11 @@ onMounted(async () => {
             placeholder="Xbox One"
           />
         </div>
+        <div class="mb-3">
+          <ErrorMessage name="product_name" class="errorMessage" />
+        </div>
+
+        <!-- Manufacturer ID field -->
         <div>
           <label class="mb-1">Manufacturer ID:</label>
           <Field
@@ -86,6 +116,11 @@ onMounted(async () => {
             placeholder="2"
           />
         </div>
+        <div class="mb-3">
+          <ErrorMessage name="manufacturer_id" class="errorMessage" />
+        </div>
+
+        <!-- Product Stock field -->
         <div>
           <label class="mb-1">Product Stock:</label>
           <Field
@@ -97,6 +132,11 @@ onMounted(async () => {
             placeholder="300"
           />
         </div>
+        <div class="mb-3">
+          <ErrorMessage name="product_stock" class="errorMessage" />
+        </div>
+
+        <!-- Product Price field -->
         <div>
           <label class="mb-1">Product Price:</label>
           <Field
@@ -107,6 +147,9 @@ onMounted(async () => {
             name="product_price"
             placeholder="250"
           />
+        </div>
+        <div class="mb-3">
+          <ErrorMessage name="product_price" class="errorMessage" />
         </div>
       </fieldset>
       <div>
