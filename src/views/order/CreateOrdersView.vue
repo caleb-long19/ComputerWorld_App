@@ -29,7 +29,6 @@ const onSubmit = async (values: { order_ref: string, order_amount: string, produ
   };
   try {
     const orderResponse = await createOrder(createNewOrder); // Create order
-    toast.success('Order created successfully!');
     await router.push(`/order/${orderResponse.order_id}`) // Navigate to the order view page
   } catch (error) {
     console.error('Error creating order:', error);
