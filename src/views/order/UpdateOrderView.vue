@@ -33,8 +33,7 @@ const onSubmit = async (values: { order_ref: string, order_amount: string, produ
     product_id: parseInt(values.product_id),
   };
   try {
-    const orderResponse = await updateOrder(updateNewOrder); // Update order
-    toast.success('Order updated successfully!');
+    const orderResponse = await updateOrder(orderID, updateNewOrder); // Update order
     await router.push(`/order/${orderResponse.order_id}`) // Navigate to the order view page
   } catch (error) {
     console.error('Error updating order:', error);

@@ -25,7 +25,6 @@ const onSubmit = async (values: { manufacturer_name: string }) => {
   };
   try {
     const manufacturerResponse = await createManufacturer(createNewManufacturer); // Create manufacturer
-    toast.success('Manufacturer created successfully!');
     await router.push(`/manufacturer/${manufacturerResponse.manufacturer_id}`); // Navigate to the manufacturer view page
   } catch (error) {
     console.error('Error creating manufacturer:', error);

@@ -27,14 +27,13 @@ const onSubmit = async (values: { product_code: string, product_name: string, ma
   const createNewProduct: Product = {
     product_code: values.product_code,
     product_name: values.product_name,
-    manufacturer_id: parseFloat(values.manufacturer_id),
+    manufacturer_id: parseInt(values.manufacturer_id),
     product_stock: parseInt(values.product_stock),
     product_price: parseFloat(values.product_price),
   };
   try {
     const productResponse = await createProduct(createNewProduct) // Create product
-    toast.success('Product created successfully!');
-    await router.push(`/order/${productResponse.product_id}`) // Navigate to the product view page
+    await router.push(`/product/${productResponse.product_id}`) // Navigate to the product view page
   } catch (error) {
     console.error('Error creating product:', error);
     toast.error('Error creating product. Please try again.');

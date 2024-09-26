@@ -14,7 +14,6 @@ const fetchProducts = async () => {
   try{
     products.value = await getAllProducts()
     console.log("Fetched products:", products.value);
-    toast.success('Products have been fetched!');
   } catch (error) {
     console.error("Failed to fetch products:", error)
     toast.error('Error: Could not fetch products')

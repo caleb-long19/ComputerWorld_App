@@ -14,7 +14,6 @@ const fetchManufacturers = async () => {
   try{
     manufacturers.value = await getAllManufacturers()
     console.log("Fetched manufacturers:", manufacturers.value);
-    toast.success('Manufacturers have been fetched!');
   } catch (error) {
     console.error("Failed to fetch manufacturers:", error)
     toast.error('Error: Could not fetch manufacturers')
