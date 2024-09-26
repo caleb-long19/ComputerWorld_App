@@ -1,3 +1,18 @@
+<script>
+export default {
+  data() {
+    return {
+      isSidebarVisible: true, // Sidebar visibility state (initially visible)
+    };
+  },
+  methods: {
+    toggleSidebar() {
+      this.isSidebarVisible = !this.isSidebarVisible;
+    },
+  },
+};
+</script>
+
 <template>
   <div class="main-layout d-flex">
     <!-- Sidebar -->
