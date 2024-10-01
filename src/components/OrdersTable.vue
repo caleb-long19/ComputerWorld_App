@@ -1,11 +1,10 @@
 <script setup lang="ts">
-
-// Define props to accept an array of orders
+import '@/assets/TableStyles.css'
 import { Order } from '@/models/Order'
 import { deleteOrder } from '@/services/OrderService'
-import { deleteProduct } from '@/services/ProductService'
 import { toast } from 'react-toastify'
 
+// Define props to accept an array of orders
 defineProps({
   orders: {
     type: Object as Order,
@@ -31,12 +30,10 @@ const handleDelete = async (orderID: number) => {
 
 </script>
 
-
 <template>
-
-  <div class="container tableFixHead" >
-    <!-- Single table with rows generated from the orders array -->
-    <table class="table table-hover">
+  <div class="container-fluid responsive-table-wrapper">
+    <!-- Single table with rows generated from the manufacturers array -->
+    <table class="table table-hover table-responsive">
       <thead class="table-warning">
       <tr>
         <th scope="col">ID</th>
@@ -44,8 +41,7 @@ const handleDelete = async (orderID: number) => {
         <th scope="col">Order Amount</th>
         <th scope="col">Product ID</th>
         <th scope="col">Order Price</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th>Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -53,24 +49,25 @@ const handleDelete = async (orderID: number) => {
       <tr
         v-for="(order) in orders"
         :key="order.order_id"
-        @click="emit('selectOrder', order)"
         style="cursor: pointer"
       >
-        <td>{{ order.order_id }}</td>
-        <td>{{ order.order_ref }}</td>
-        <td>{{ order.order_amount }}</td>
-        <td>{{ order.product_id }}</td>
-        <td>{{ order.order_price }}</td>
-        <td>
-          <!-- Take user to OrderView with ID value selected -->
-          <button class="btn btn-success">
-            <RouterLink :to="`/order/${order.order_id}`" class="nav-link">View</RouterLink>
-          </button>
-        </td>
-        <td>
+        <td data-label="ID">{{ order.order_id }}</td>
+        <td data-label="Order Ref">{{ order.order_ref }}</td>
+        <td data-label="Order Amount">{{ order.order_amount }}</td>
+        <td data-label="Product ID">{{ order.product_id }}</td>
+        <td data-label="Order Price">{{ order.order_price }}</td>
+        <td data-label="Actions">
+          <!-- View button -->
+          <RouterLink :to="`/order/${order.order_id}`">
+            <button class="btn btn-info btn-sm mb-1">View</button>
+          </RouterLink>
+          <!-- Delete button -->
           <button
             @click="() => handleDelete(order.order_id)"
-            class="btn btn-danger btn-xs">Delete</button>
+            class="btn btn-danger btn-sm mb-1"
+          >
+            Delete
+          </button>
         </td>
       </tr>
       </tbody>
