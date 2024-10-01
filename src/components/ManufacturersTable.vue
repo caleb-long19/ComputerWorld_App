@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import '@/assets/TableStyles.css'
 import { Manufacturer } from '@/models/Manufacturer'
 import { deleteManufacturer } from '@/services/ManufacturerService'
-import { deleteOrder } from '@/services/OrderService'
 import { toast } from 'react-toastify'
 
 // Define props to accept an object array of manufacturers
@@ -27,19 +27,17 @@ const handleDelete = async (manufacturerID: number) => {
     }
   }
 }
-
 </script>
 
 <template>
-  <div class="container tableFixHead">
+  <div class="container-fluid responsive-table-wrapper">
     <!-- Single table with rows generated from the manufacturers array -->
-    <table class="table table-hover">
+    <table class="table table-hover table-responsive">
       <thead class="table-warning">
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Manufacturer</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th>ID</th>
+        <th>Manufacturer</th>
+        <th>Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -49,22 +47,20 @@ const handleDelete = async (manufacturerID: number) => {
         :key="manufacturer.manufacturer_id"
         style="cursor: pointer"
       >
-        <td>
-          {{ manufacturer.manufacturer_id }}
-        </td>
-        <td>
-          {{ manufacturer.manufacturer_name }}
-        </td>
-        <td>
-          <!-- Take user TO ManufacturerView with ID value selected -->
-          <button class="btn btn-success">
-            <RouterLink :to="`/manufacturer/${manufacturer.manufacturer_id}`" class="nav-link">View</RouterLink>
-          </button>
-        </td>
-        <td>
+        <td data-label="ID">{{ manufacturer.manufacturer_id }}</td>
+        <td data-label="Manufacturer">{{ manufacturer.manufacturer_name }}</td>
+        <td data-label="Actions">
+          <!-- View button -->
+          <RouterLink :to="`/manufacturer/${manufacturer.manufacturer_id}`">
+            <button class="btn btn-info btn-sm mb-1">View</button>
+          </RouterLink>
+          <!-- Delete button -->
           <button
             @click="() => handleDelete(manufacturer.manufacturer_id)"
-            class="btn btn-danger btn-xs">Delete</button>
+            class="btn btn-danger btn-sm mb-1"
+          >
+            Delete
+          </button>
         </td>
       </tr>
       </tbody>

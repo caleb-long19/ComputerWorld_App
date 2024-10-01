@@ -36,7 +36,7 @@ onMounted(async () => {
         :products="products"
         @deleteProduct="fetchProducts"
       />
-      <button class="btn btn-info">
+      <button class="btn btn-success">
         <RouterLink :to="{ name: 'create-product'}" class="nav-link">Create Product</RouterLink>
       </button>
     </div>

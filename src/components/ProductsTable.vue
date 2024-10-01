@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import '@/assets/TableStyles.css'
 import { Product } from '@/models/Product'
 import { deleteProduct } from '@/services/ProductService'
 import { toast } from 'react-toastify'
@@ -31,10 +32,9 @@ const handleDelete = async (productID: number) => {
 
 
 <template>
-
-  <div class="container tableFixHead">
-    <!-- Single table with rows generated from the products object -->
-    <table class="table table-hover">
+  <div class="container-fluid responsive-table-wrapper">
+    <!-- Single table with rows generated from the manufacturers array -->
+    <table class="table table-hover table-responsive">
       <thead class="table-warning">
       <tr>
         <th scope="col">ID</th>
@@ -43,8 +43,7 @@ const handleDelete = async (productID: number) => {
         <th scope="col">Manufacturer ID</th>
         <th scope="col">Stock</th>
         <th scope="col">Price</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th>Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -52,25 +51,26 @@ const handleDelete = async (productID: number) => {
       <tr
         v-for="(product) in products"
         :key="product.product_id"
-        @click="emit('selectProduct', product)"
         style="cursor: pointer"
       >
-        <td>{{ product.product_id }}</td>
-        <td>{{ product.product_code }}</td>
-        <td>{{ product.product_name }}</td>
-        <td>{{ product.manufacturer_id }}</td>
-        <td>{{ product.product_stock }}</td>
-        <td>{{ product.product_price }}</td>
-        <td>
-          <!-- Take user to OrderView with ID value selected -->
-          <button class="btn btn-success">
-            <RouterLink :to="`/product/${product.product_id}`" class="nav-link">View</RouterLink>
-          </button>
-        </td>
-        <td>
+        <td data-label="ID">{{ product.product_id }}</td>
+        <td data-label="Product Code">{{ product.product_code }}</td>
+        <td data-label="Product Name">{{ product.product_name }}</td>
+        <td data-label="Manufacturer ID">{{ product.manufacturer_id }}</td>
+        <td data-label="Product Stock">{{ product.product_stock }}</td>
+        <td data-label="Product Price">{{ product.product_price }}</td>
+        <td data-label="Actions">
+          <!-- View button -->
+          <RouterLink :to="`/product/${product.product_id}`">
+            <button class="btn btn-info btn-sm mb-1">View</button>
+          </RouterLink>
+          <!-- Delete button -->
           <button
             @click="() => handleDelete(product.product_id)"
-            class="btn btn-danger btn-xs">Delete</button>
+            class="btn btn-danger btn-sm mb-1"
+          >
+            Delete
+          </button>
         </td>
       </tr>
       </tbody>
