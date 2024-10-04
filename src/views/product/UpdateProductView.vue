@@ -39,6 +39,7 @@ const onSubmit = async (values: { product_code: string, product_name: string, ma
   try {
     const productResponse = await updateProduct(productID, updateNewProduct) // Create product
     await router.push(`/product/${productResponse.product_id}`) // Navigate to the product view page
+    toast.success('Successfully updated product!');
   } catch (error) {
     console.error('Error updating product:', error);
     toast.error('Error updating product. Please try again.');

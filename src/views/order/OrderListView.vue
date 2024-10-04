@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Order } from '@/models/Order'
 import { onMounted, ref } from 'vue'
-import OrderTable from '@/components/OrdersTable.vue'
+import OrderTable from '@/components/orders/OrdersTable.vue'
 import { getAllOrders } from '@/services/OrderService'
 import { useToast } from 'vue-toastification'
 
@@ -14,6 +14,7 @@ const fetchOrders = async () => {
   try{
     orders.value = await getAllOrders()
     console.log("Fetched orders:", orders.value);
+    toast.success('Orders have been successfully fetched!')
   } catch (error) {
     console.log("Failed to fetch orders:", error)
     toast.error('Error: Could not fetch orders')

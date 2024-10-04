@@ -3,6 +3,9 @@ import { useRoute } from 'vue-router'
 import { Product } from '@/models/Product'
 import { onMounted, ref } from 'vue'
 import { getProduct } from '@/services/ProductService'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 const route = useRoute()
 const productID = route.params.id
@@ -10,8 +13,19 @@ const productID = route.params.id
 // Initialize products
 const product = ref<Product>(null)
 
+const fetchProduct = async () => {
+  try{
+    product.value = await getProduct(productID)
+    console.log("Fetched product:", product.value);
+    toast.success('Product has been successfully fetched!')
+  } catch (error) {
+    console.error("Failed to fetch product:", error)
+    toast.error('Error: Could not fetch product')
+  }
+}
+
 onMounted(async () => {
-  product.value = await getProduct(productID)
+  await fetchProduct()
 })
 
 </script>

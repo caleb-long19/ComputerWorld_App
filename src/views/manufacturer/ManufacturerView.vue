@@ -3,6 +3,9 @@ import { useRoute } from 'vue-router'
 import { Manufacturer } from '@/models/Manufacturer.js'
 import { onMounted, ref } from 'vue'
 import { getManufacturer } from '@/services/ManufacturerService'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 const route = useRoute()
 const manufacturerID = route.params.id
@@ -10,8 +13,19 @@ const manufacturerID = route.params.id
 // Initialize manufacturers
 const manufacturer = ref<Manufacturer>(null)
 
+const fetchManufacturer = async () => {
+  try{
+    manufacturer.value = await getManufacturer(manufacturerID)
+    console.log("Fetched manufacturer:", manufacturer.value);
+    toast.success('Manufacturer has been successfully fetched!')
+  } catch (error) {
+    console.error("Failed to fetch manufacturer:", error)
+    toast.error('Error: Could not fetch manufacturer')
+  }
+}
+
 onMounted(async () => {
-  manufacturer.value = await getManufacturer(manufacturerID)
+  await fetchManufacturer()
 })
 
 </script>

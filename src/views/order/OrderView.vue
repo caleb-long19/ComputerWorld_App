@@ -3,6 +3,9 @@ import { useRoute } from 'vue-router'
 import { Order } from '@/models/Order'
 import { onMounted, ref } from 'vue'
 import { getOrder } from '@/services/OrderService'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 const route = useRoute()
 const orderID = route.params.id
@@ -10,8 +13,19 @@ const orderID = route.params.id
 // Initialize orders
 const order = ref<Order>(null)
 
+const fetchOrder = async () => {
+  try{
+    order.value = await getOrder(orderID)
+    console.log("Fetched order:", order.value);
+    toast.success('Order has been successfully fetched!')
+  } catch (error) {
+    console.log("Failed to fetch order:", error)
+    toast.error('Error: Could not fetch order')
+  }
+}
+
 onMounted(async () => {
-  order.value = await getOrder(orderID)
+  await fetchOrder()
 })
 
 </script>

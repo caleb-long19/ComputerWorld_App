@@ -21,6 +21,7 @@ const handleDelete = async (productID: number) => {
     try {
       await deleteProduct(productID)
       emit('deleteProduct')  // Emit the event to update the product list
+      toast.success('Product deleted')
     } catch (error) {
       console.error('Error deleting product:', error)
       toast.error('Error: Could not delete product!')

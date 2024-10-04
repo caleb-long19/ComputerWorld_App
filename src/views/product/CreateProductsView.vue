@@ -34,6 +34,7 @@ const onSubmit = async (values: { product_code: string, product_name: string, ma
   try {
     const productResponse = await createProduct(createNewProduct) // Create product
     await router.push(`/product/${productResponse.product_id}`) // Navigate to the product view page
+    toast.success('Successfully created product!');
   } catch (error) {
     console.error('Error creating product:', error);
     toast.error('Error creating product. Please try again.');
