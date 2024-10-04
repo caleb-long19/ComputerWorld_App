@@ -21,6 +21,7 @@ const handleDelete = async (orderID: number) => {
     try {
       await deleteOrder(orderID)
       emit('deleteOrder')  // Emit the event to update the order list
+      toast.success('Order deleted')
     } catch (error) {
       console.error('Error deleting order:', error)
       toast.error('Error: Could not delete order!')

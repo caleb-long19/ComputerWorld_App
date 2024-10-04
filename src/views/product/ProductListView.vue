@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Product } from '@/models/Product.js'
 import { onMounted, ref } from 'vue'
-import ProductTable from '@/components/ProductsTable.vue'
+import ProductTable from '@/components/products/ProductsTable.vue'
 import { getAllProducts } from '@/services/ProductService'
 import { useToast } from 'vue-toastification'
 
@@ -14,6 +14,7 @@ const fetchProducts = async () => {
   try{
     products.value = await getAllProducts()
     console.log("Fetched products:", products.value);
+    toast.success('Products have been successfully fetched!')
   } catch (error) {
     console.error("Failed to fetch products:", error)
     toast.error('Error: Could not fetch products')

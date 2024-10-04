@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Manufacturer } from '@/models/Manufacturer.js'
 import { onMounted, ref } from 'vue'
-import ManufacturersTable from '@/components/ManufacturersTable.vue'
+import ManufacturersTable from '@/components/manufacturers/ManufacturersTable.vue'
 import { getAllManufacturers } from '@/services/ManufacturerService'
 import { useToast } from 'vue-toastification'
 
@@ -14,6 +14,7 @@ const fetchManufacturers = async () => {
   try{
     manufacturers.value = await getAllManufacturers()
     console.log("Fetched manufacturers:", manufacturers.value);
+    toast.success('Manufacturers have been successfully fetched!')
   } catch (error) {
     console.error("Failed to fetch manufacturers:", error)
     toast.error('Error: Could not fetch manufacturers')

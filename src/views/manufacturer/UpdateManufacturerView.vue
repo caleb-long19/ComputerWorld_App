@@ -31,6 +31,7 @@ const onSubmit = async (values: { manufacturer_name: string }) => {
   try {
     const manufacturerResponse = await updateManufacturer(manufacturerID, updateNewManufacturer) // Update manufacturer
     await router.push(`/manufacturer/${manufacturerResponse.manufacturer_id}`) // Re-routes the user to the manufacturer view page - displays updated manufacturer
+    toast.success('Successfully updated manufacturer!');
   } catch (error) {
     console.error('Error updating manufacturer:', error);
     toast.error('Error updating manufacturer. Please try again.');

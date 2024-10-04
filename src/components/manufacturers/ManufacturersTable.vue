@@ -21,6 +21,7 @@ const handleDelete = async (manufacturerID: number) => {
     try {
       await deleteManufacturer(manufacturerID)
       emit('deleteManufacturer')  // Emit the event to update the Manufacturer list
+      toast.success('Manufacturer deleted')
     } catch (error) {
       console.error('Error deleting manufacturer:', error)
       toast.error('Error: Could not delete manufacturer!')
